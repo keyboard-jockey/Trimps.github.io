@@ -4914,7 +4914,7 @@ function message(messageString, type, lootIcon, extraClass, extraTag, htmlPrefix
 	}
 	let msgZone = ""
 	if (true){ // FIXME: create game.options.menu.logCells menu option
-		// z<Zone>:c<Cell>[:[bw|v]z<maplevel>:c<mapCell>] + messageString
+		// z<Zone>:c<Cell>[:[M|B|V]<maplevel>:c<mapCell>] + messageString
 		let worldCell = game.global.lastClearedCell + 2; // same method as tooltip
 		let worldZone = game.global.world;
 		msgZone = "z" + worldZone + ":c" + worldCell;
