@@ -4908,9 +4908,27 @@ function message(messageString, type, lootIcon, extraClass, extraTag, htmlPrefix
 			return;
 		}
 	}
-    if (game.options.menu.timestamps.enabled){
-        messageString = ((game.options.menu.timestamps.enabled == 1) ? getCurrentTime() : updatePortalTimer(true)) + " " + messageString;
-    }
+	let msgTime = ""
+	if (game.options.menu.timestamps.enabled){
+		msgTime = ((game.options.menu.timestamps.enabled == 1) ? getCurrentTime() : updatePortalTimer(true)) + " ";
+	}
+	let msgZone = ""
+	if (true){ // FIXME: create game.options.menu.logCells menu option
+		// z<Zone>:c<Cell>[:[bw|v]z<maplevel>:c<mapCell>] + messageString
+		let worldCell = game.global.lastClearedCell + 2; // same method as tooltip
+		let worldZone = game.global.world;
+		msgZone = "z" + worldZone + ":c" + worldCell;
+		if ((game.global.mapsActive || game.global.preMapsActive) && game.global.currentMapId){
+			let map = getCurrentMapObject();
+			let mapZone = map.level;
+			let mapType = map.location[0]; // first char to abbreviate bw/void
+			let mapCell = game.global.lastClearedMapCell + 2; // same method as tooltip
+			msgZone = msgZone + ":" + mapType + mapZone + ":c" + mapCell;
+		}
+		msgZone = msgZone + " ";
+	}
+	messageString = msgTime + msgZone + messageString;
+
     if (!htmlPrefix){
         if (lootIcon && lootIcon.charAt(0) == "*") {
             lootIcon = lootIcon.replace("*", "");
