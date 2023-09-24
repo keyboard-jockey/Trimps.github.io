@@ -15198,7 +15198,7 @@ function fight(makeUp) {
 		game.global.soldierHealth -= game.global.soldierHealthMax * 0.05;
 		if (game.global.soldierHealth < 0) thisKillsTheTrimp();
 	}
-	else if (challengeActive("Lead") && attacked && cell.health > 0){
+	if (challengeActive("Lead") && attacked && cell.health > 0){
 		game.global.soldierHealth -= (game.global.soldierHealthMax * Math.min(game.challenges.Lead.stacks, 200) * 0.0003);
 		if (game.global.soldierHealth < 0) thisKillsTheTrimp();
 	}
